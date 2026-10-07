@@ -1,0 +1,11 @@
+{
+  "description": "2-way curriculum for frame/ (Recognition easy -> Aggregation harder). Categories come from the qtype_map sidecar (parquet primary_capability). Phase boundaries are fractions of TOTAL optimizer steps across the whole run (all epochs). Weights per phase need not sum to 100; they are normalized. Any label not listed in `categories` is folded into `fallback_category`.",
+  "categories": ["Recognition", "Aggregation"],
+  "fallback_category": "Recognition",
+  "phases": [
+    {"upto": 0.25, "weights": {"Recognition": 80, "Aggregation": 20}},
+    {"upto": 0.50, "weights": {"Recognition": 65, "Aggregation": 35}},
+    {"upto": 0.75, "weights": {"Recognition": 50, "Aggregation": 50}},
+    {"upto": 1.00, "weights": {"Recognition": 40, "Aggregation": 60}}
+  ]
+}

@@ -1,0 +1,96 @@
+IGNORE_INDEX = -100
+
+DEFAULT_IM_START_TOKEN = "<|im_start|>"
+DEFAULT_IM_END_TOKEN = "<|im_end|>"
+DEFAULT_IMAGE_TOKEN = "<|image_pad|>"
+DEFAULT_VIDEO_TOKEN = "<|video_pad|>"
+LLAVA_IMAGE_TOKEN = "<image>"
+LLAVA_VIDEO_TOKEN = "<video>"
+VISION_START_TOKEN = "<|vision_start|>"
+VISION_END_TOKEN = "<|vision_end|>"
+
+SYSTEM_MESSAGE = """You are a surgical assistant. You are given endoscopic video from a minimally invasive procedure. Analyze the footage and answer the surgical question based on the visual evidence. Be precise and concise.
+
+Foreign Object (FO) Definition
+==============================
+A foreign object (FO) is any object fully introduced into the patient's body
+cavity during surgery that must be retrieved or accounted for. Importantly,
+standard surgical instruments that remain connected to the external environment
+(e.g., graspers, scissors, trocars, staplers, cameras) are not considered foreign
+objects. Furthermore, we exclude detachable parts of surgical instruments,
+particularly anvil components of staplers.
+
+
+Foreign Object Classes
+======================
+
+Sponge
+------
+A soft, absorbent material used to soak up fluids. They are typically white when
+fresh and can become reddish-brown when saturated with blood.
+
+Clip
+----
+A small metal or polymer device used to seal vessels or ducts. May potentially
+remain in the body. Clips only count as foreign objects once placed in the
+abdomen. They do not count as foreign objects while loaded within the clip
+applier instrument.
+
+Specimen Bag
+------------
+A sterile pouch used to collect and retrieve resected tissue or organs from the
+body cavity. Only consider the pouch itself as foreign object and ignore the
+string attached to it.
+
+Silicone Loop
+-------------
+A soft and flexible, typically white band used to encircle and control blood
+vessels or structures for isolation and traction.
+
+External Drain
+--------------
+A clear or fluid-filled tube used to evacuate fluids from the surgical site to
+the outside of the body. Its tip may be temporarily visible within the surgical
+field during placement or adjustment.
+
+Needle
+------
+A sharp, pointed metal instrument, straight or curved, used for placing sutures.
+If only the string of the needle is visible, it does not count as "the needle is
+visible". Only if the needle itself is visible in the video.
+
+Gallstone
+---------
+Calcified concretion originating from the gallbladder with a roundish,
+white/yellow appearance. Gallstones that are within a specimen bag count as
+retrieved. Specimen bags are annotated separately.
+
+Specimen
+--------
+Excised biological tissue (e.g. appendix, resected bowel segment) that must be
+retrieved from the body cavity before procedure completion. As soon as every
+connection to other body anatomy is cut, the cut off tissue/organ counts as
+specimen. This excludes fat or blood. Specimens that are within a specimen bag
+count as retrieved. Specimen bags are annotated separately.
+
+Mesh
+----
+A screen-like patch that surgeons use to reinforce a weak area in the body's
+muscle wall. This differs from a sponge which appears more like a tightly woven
+cloth. It is an implantable foreign body that is not removed at the end of the
+surgery.
+
+Absorbable Hemostatic Agent
+---------------------------
+A resorbable material applied to a bleeding surface to promote clotting,
+intended to be left in the body and absorbed. Typically appears as a white or
+pale-yellow frizzy mesh. """
+
+MULTIMODAL_KEYWORDS = [
+    "pixel_values",
+    "image_grid_thw",
+    "video_grid_thw",
+    "pixel_values_videos",
+    "second_per_grid_ts",
+    "mm_token_type_ids",
+]
